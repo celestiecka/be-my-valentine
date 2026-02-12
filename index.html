@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Ayannn ❤️</title>
+    <style>
+        :root {
+            --primary-pink: #ff69b4;
+            --dark-pink: #d02090;
+            --soft-pink: #fff0f5;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, var(--soft-pink), #ffdee9);
+            overflow: hidden;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .container {
+            z-index: 10;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid var(--primary-pink);
+            width: 85%;
+            max-width: 400px;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 { color: var(--dark-pink); font-size: 1.8rem; margin-bottom: 15px; }
+        p { color: #444; font-size: 1.1rem; line-height: 1.4; margin-bottom: 20px; min-height: 3em; }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            min-height: 150px;
+        }
+
+        button {
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 15px;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        #yes { background-color: var(--primary-pink); color: white; width: 100%; z-index: 20; }
+        #no { background-color: #eee; color: #888; width: 100%; }
+
+        .quiz-opt {
+            background-color: white;
+            border: 2px solid var(--primary-pink);
+            color: var(--dark-pink);
+            width: 100%;
+        }
+
+        .quiz-opt:active { background-color: var(--primary-pink); color: white; }
+
+        .heart {
+            position: absolute;
+            top: -10%;
+            color: var(--primary-pink);
+            font-size: 20px;
+            user-select: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-card">
+        <div id="quiz-content">
+            <h1 id="header-text">Hey Ayang! ✨</h1>
+            <p id="sub-text">I have a very important question... will you be my girlfriend?</p>
+            <div class="btn-group" id="btn-container">
+                <button id="yes" onmouseover="moveButton('yes')" onclick="startQuiz()">YES! ❤️</button>
+                <button id="no" onmouseover="moveButton('no')">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let step = 0;
+        let yesCatchCount = 0; 
+        const selections = {};
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 300);
+
+        function moveButton(buttonId) {
+            const btn = document.getElementById(buttonId);
+            const subText = document.getElementById('sub-text');
+            
+            if (buttonId === 'yes') {
+                yesCatchCount++;
+                if (yesCatchCount === 1) subText.innerHTML = "Too slow, Ayang! 😂";
+                else if (yesCatchCount === 2) subText.innerHTML = "Are you sure?? 🤨";
+                else if (yesCatchCount === 3) subText.innerHTML = "You don't like me enough I guess? 🥺";
+                else if (yesCatchCount === 4) subText.innerHTML = "Please admit u musyop
