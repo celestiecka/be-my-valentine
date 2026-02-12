@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <title>For Ayannn ❤️</title> <style> body { margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background: #fff0f5; overflow: hidden; font-family: sans-serif; touch-action: none; } .box { z-index: 10; text-align: center; background: white; padding: 30px; border-radius: 20px; border: 2px solid #ff69b4; width: 80%; max-width: 350px; position: relative; } h1 { color: #d02090; font-size: 1.4rem; } button { padding: 15px; font-weight: bold; border-radius: 12px; border: none; cursor: pointer; transition: all 0.15s ease; }
+
+/* YES button starts tiny and in the corner */
+#yes { 
+    background: #ff69b4; 
+    color: white; 
+    position: fixed; 
+    bottom: 10px; 
+    right: 10px; 
+    width: 60px; 
+    height: 40px; 
+    font-size: 10px; 
+    z-index: 1000;
+}
+
+/* NO button stays big in the center */
+#no { 
+    background: #eee; 
+    color: #888; 
+    width: 100%; 
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.quiz-btn { background: #ff69b4; color: white; width: 100%; margin: 10px 0; font-size: 1.1rem; }
+
+.heart { position: absolute; top: -10%; color: #ff69b4; animation: fall 3s linear infinite; pointer-events: none; }
+@keyframes fall { to { transform: translateY(110vh); } }
+</style> </head> <body>
+
+<div class="box" id="container"> <h1 id="title">Hey Ayang! ✨</h1> <p id="msg">Will you be my forever valentine?</p> <div id="btn-group"> <button id="no" onclick="handleInput(event)" ontouchstart="handleInput(event)">No</button> </div> </div>
+
+<button id="yes" onclick="handleInput(event)" ontouchstart="handleInput(event)">YES! ❤️</button>
+
+<script> let count = 0; let food = ""; let act = "";
+
+function handleInput(e) {
+    if (e.type === &#39;touchstart&#39;) e.preventDefault();
+    
+    count++;
+    const msg = document.getElementById(&#39;msg&#39;);
+    const yesBtn = document.getElementById(&#39;yes&#39;);
+    const noBtn = document.getElementById(&#39;no&#39;);
+    const container = document.getElementById(&#39;container&#39;);
+
+    if (count &lt;= 5) {
+        // JUMP LOGIC
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 100);
+        
+        yesBtn.style.position = &quot;fixed&quot;;
+        yesBtn.style.left = Math.max(10, x) + &quot;px&quot;;
+        yesBtn.style.top = Math.max(10, y) + &quot;px&quot;;
+        
+        // Every jump makes it slightly bigger/more noticeable
+        if (count == 1) {
+            msg.innerHTML = &quot;Too slow, Ayang! 😂&quot;;
+            yesBtn.style.width = &quot;80px&quot;;
+            yesBtn.style.fontSize = &quot;12px&quot;;
+        }
+        if (count == 2) msg.innerHTML = &quot;Are you sure?? 🤨&quot;;
+        if (count == 3) msg.innerHTML = &quot;You don&#39;t like me enough I guess? 🥺&quot;;
+        if (count == 4) msg.innerHTML = &quot;Please admit u musyop, say it out loud! 📣&quot;;
+        
+        if (count == 5) {
+            msg.innerHTML = &quot;Yep, you are musyop. Click it now! 😏&quot;;
+            // Snap YES back to the box and make it huge
+            yesBtn.style.position = &quot;static&quot;;
+            yesBtn.style.width = &quot;100%&quot;;
+            yesBtn.style.height = &quot;auto&quot;;
+            yesBtn.style.fontSize = &quot;1.2rem&quot;;
+            yesBtn.style.margin = &quot;10px 0&quot;;
+            
+            // Put it inside the white box
+            document.getElementById(&#39;btn-group&#39;).appendChild(yesBtn);
+            noBtn.style.display = &quot;none&quot;;
+        }
+    } else {
+        startQuiz();
+    }
+}
+
+function startQuiz() {
+    document.getElementById(&#39;container&#39;).innerHTML = &quot;&lt;h1&gt;Food? 🍜&lt;/h1&gt;&quot; +
+    &quot;&lt;button class=&#39;quiz-btn&#39; onclick=&#39;saveF(\&quot;Sushi\&quot;)&#39;&gt;Sushi 🍣&lt;/button&gt;&quot; +
+    &quot;&lt;button class=&#39;quiz-btn&#39; onclick=&#39;saveF(\&quot;Pasta\&quot;)&#39;&gt;Pasta 🍝&lt;/button&gt;&quot; +
+    &quot;&lt;button class=&#39;quiz-btn&#39; onclick=&#39;saveF(\&quot;Steak\&quot;)&#39;&gt;Steak 🥩&lt;/button&gt;&quot;;
+    // Remove the extra button from body if it&#39;s still there
+    const extraYes = document.body.querySelector(&#39;#yes&#39;);
+    if(extraYes) extraYes.remove();
+}
+
+function saveF(f) {
+    food = f;
+    document.getElementById(&#39;container&#39;).innerHTML = &quot;&lt;h1&gt;Activity? 🎡&lt;/h1&gt;&quot; +
+    &quot;&lt;button class=&#39;quiz-btn&#39; onclick=&#39;saveA(\&quot;Movie\&quot;)&#39;&gt;Movie 🍿&lt;/button&gt;&quot; +
+    &quot;&lt;button class=&#39;quiz-btn&#39; onclick=&#39;saveA(\&quot;Arcade\&quot;)&#39;&gt;Arcade 👾&lt;/button&gt;&quot;;
+}
+
+function saveA(a) {
+    act = a;
+    document.getElementById(&#39;container&#39;).innerHTML = &quot;&lt;h1&gt;Confirmed! ❤️&lt;/h1&gt;&lt;p&gt;Feb 17th!&lt;/p&gt;&quot; +
+    &quot;&lt;p&gt;Food: &quot;+food+&quot;<br>Act: &quot;+act+&quot;&lt;/p&gt;&lt;b&gt;Screenshot this!&lt;/b&gt;&quot;;
+}
+
+setInterval(() =&gt; {
+    const h = document.createElement(&#39;div&#39;); h.innerHTML = &#39;❤️&#39;; h.className = &#39;heart&#39;;
+    h.style.left = Math.random() * 100 + &#39;vw&#39;; document.body.appendChild(h);
+    setTimeout(() =&gt; h.remove(), 3000);
+}, 400);
+</script>
+
+</body> </html>
